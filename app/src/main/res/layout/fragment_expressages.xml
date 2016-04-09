@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ExpressagesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.jamie.express.listviews.RefreshableListView
+        android:id="@+id/fe_rlv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.jamie.express.listviews.RefreshableListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fe_fab_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:src="@android:drawable/ic_search_category_default" />
+
+</FrameLayout>

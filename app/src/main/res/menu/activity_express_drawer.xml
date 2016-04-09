@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_expressages"
+            android:icon="@drawable/ic_nav_expressages"
+            android:title="@string/title_expressages" />
+        <item
+            android:id="@+id/nav_post"
+            android:icon="@drawable/ic_nav_post"
+            android:title="@string/title_post" />
+        <item
+            android:id="@+id/nav_post_records"
+            android:icon="@drawable/ic_nav_post_records"
+            android:title="@string/title_post_records" />
+        <item
+            android:id="@+id/nav_apply_records"
+            android:icon="@drawable/ic_nav_apply_records"
+            android:title="@string/title_help_records" />
+        <item
+            android:id="@+id/nav_to_comments"
+            android:icon="@drawable/ic_nav_to_comments"
+            android:title="@string/title_to_comments" />
+        <item
+            android:id="@+id/nav_personal"
+            android:icon="@drawable/ic_nav_personal"
+            android:title="@string/title_personal" />
+        <item
+            android:id="@+id/nav_credit"
+            android:icon="@drawable/ic_nav_credit"
+            android:title="@string/title_credit" />
+        <item
+            android:id="@+id/nav_messages"
+            android:icon="@drawable/ic_nav_messages"
+            android:title="@string/title_messages" />
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_nav_exit"
+            android:title="@string/title_exit" />
+    </group>
+
+</menu>

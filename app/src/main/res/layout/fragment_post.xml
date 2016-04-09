@@ -1,0 +1,209 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.jamie.express.fragments.PostFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/fp_et_addr"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/et_radius"
+            android:gravity="top"
+            android:hint="请输入快递地址"
+            android:maxLines="1"
+            android:minLines="1"></EditText>
+
+        <EditText
+            android:id="@+id/fp_et_substance"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/et_radius"
+            android:gravity="top"
+            android:hint="请输入快递内容"
+            android:maxLines="1"
+            android:minLines="1"></EditText>
+
+        <EditText
+            android:id="@+id/fp_et_description"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/et_radius"
+            android:gravity="top"
+            android:hint="请输入详情描述"
+            android:inputType="textMultiLine"
+            android:maxLines="5"
+            android:minLines="5"></EditText>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <!--<TextView-->
+            <!--android:id="@+id/fp_tv_deadline_date"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="3"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="2016-01-01"-->
+            <!--android:textSize="18dp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/fp_tv_deadline_time"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="2"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:text="11:30"-->
+            <!--android:textSize="18dp" />-->
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="截至"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/fp_btn_pick_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/fp_btn_pick_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="报酬金额"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/fp_et_reward"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/et_radius"
+                android:hint="请输入本次报酬"
+                android:inputType="numberDecimal"
+                android:text="0"></EditText>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:paddingStart="16dp"
+                android:text="元"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="当前标签"
+                android:textSize="15sp" />
+
+            <GridView
+                android:id="@+id/fp_gv_curr_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:horizontalSpacing="3dp"
+                android:numColumns="2"
+                android:padding="5dp"
+                android:verticalSpacing="3dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="未选标签"
+                android:textSize="15sp" />
+
+            <GridView
+                android:id="@+id/fp_gv_all_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:horizontalSpacing="3dp"
+                android:numColumns="2"
+                android:padding="5dp"
+                android:verticalSpacing="3dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:paddingEnd="20dp"
+            android:paddingStart="20dp">
+
+            <Button
+                android:id="@+id/fp_btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:text="@string/all_cancel" />
+
+            <Button
+                android:id="@+id/fp_btn_post"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:text="@string/all_confirm" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
