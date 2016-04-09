@@ -234,17 +234,17 @@ public class ViewDetailActivity extends AppCompatActivity {
 
     private void executeResult(int integer) {
         if (integer == PushMessages.SUCCESS) {
-            Toast.makeText(getApplicationContext(), "操作成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.success_executing, Toast.LENGTH_SHORT).show();
             ViewDetailActivity.this.finish();
             return;
         } else if (integer == PushMessages.FAILED_PUSHING) {
-            Toast.makeText(getApplicationContext(), "消息发送失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.failed_pushing, Toast.LENGTH_SHORT).show();
             return;
         } else if (integer == PushMessages.FAILED_SAVING) {
-            Toast.makeText(getApplicationContext(), "操作失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.failed_executing, Toast.LENGTH_SHORT).show();
             return;
         } else {
-            Toast.makeText(getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
             return;
         }
     }
@@ -281,7 +281,7 @@ public class ViewDetailActivity extends AppCompatActivity {
                 }
                 return;
             }
-            Toast.makeText(getApplicationContext(), "网络繁忙", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
         }
     }
 }

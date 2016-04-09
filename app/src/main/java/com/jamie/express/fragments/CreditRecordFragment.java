@@ -123,7 +123,7 @@ public class CreditRecordFragment extends Fragment {
                     int resultCode = jsonObject.getInt("code");
                     if (resultCode == HttpUtil.NO_DATA) {
                         endData = true;
-                        Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         return;
                     } else if (resultCode == HttpUtil.SUCCESS) {
                         JSONObject allData = jsonObject.getJSONObject("data");
@@ -153,15 +153,15 @@ public class CreditRecordFragment extends Fragment {
                         page += 1;
                         if (credits.length() < 10) {
                             endData = true;
-                            Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                         GET_DATA_TASK_STATE = AVAILABLE;
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
-                    Toast.makeText(getActivity().getApplicationContext(), "暂无评价", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
@@ -190,13 +190,13 @@ public class CreditRecordFragment extends Fragment {
             int state = Integer.valueOf(list.get(position).get(UsedFields.DBCreditRecord.TYPE).toString());
             switch (state) {
                 case 1:
-                    tvState.setText("状态：任务完成");
+                    tvState.setText(R.string.state_done);
                     break;
                 case 2:
-                    tvState.setText("状态：任务取消");
+                    tvState.setText(R.string.state_disabled);
                     break;
                 case 3:
-                    tvState.setText("状态：任务过期");
+                    tvState.setText(R.string.state_expired);
                     break;
                 default:
                     break;

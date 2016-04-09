@@ -255,10 +255,10 @@ public class PersonInfoFragment extends Fragment {
                         protected void onPostExecute(Integer integer) {
                             super.onPostExecute(integer);
                             if (integer == HttpUtil.SUCCESS) {
-                                Toast.makeText(getActivity(), "标签修改成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.success_executing, Toast.LENGTH_SHORT).show();
                                 ((ExpressActivity) getActivity()).goToFragment(R.id.nav_expressages);
                             } else {
-                                Toast.makeText(getActivity(), "标签修改失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.failed_executing, Toast.LENGTH_SHORT).show();
                             }
                         }
                     }.execute();
@@ -289,7 +289,7 @@ public class PersonInfoFragment extends Fragment {
                 @Override
                 protected void onPostExecute(JSONObject jsonObject) {
                     if (jsonObject == null) {
-                        Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                         //dialog.dismiss();
                         return;
                     }
@@ -312,7 +312,7 @@ public class PersonInfoFragment extends Fragment {
                             allTagsAdapter.notifyDataSetChanged();
                             return;
                         } else {
-                            Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                             //dialog.dismiss();
                             return;
                         }

@@ -67,7 +67,7 @@ public class CommentActivity extends AppCompatActivity {
                     String content = etContent.getText().toString();
                     new CommentTask().execute(rating, content);
                 } else {
-                    Toast.makeText(getApplicationContext(), "请填写评论内容", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.input_empty, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -91,17 +91,17 @@ public class CommentActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             if (integer == PushMessages.SUCCESS) {
-                Toast.makeText(getApplicationContext(), "评论成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.success_executing, Toast.LENGTH_SHORT).show();
                 CommentActivity.this.finish();
                 return;
             } else if (integer == PushMessages.FAILED_PUSHING) {
-                Toast.makeText(getApplicationContext(), "发送消息失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.failed_pushing, Toast.LENGTH_SHORT).show();
                 return;
             } else if (integer == PushMessages.FAILED_SAVING) {
-                Toast.makeText(getApplicationContext(), "评论失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.failed_executing, Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                Toast.makeText(getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                 return;
             }
         }

@@ -253,7 +253,7 @@ public class ExpressagesFragment extends Fragment {
                 @Override
                 protected void onPostExecute(JSONObject jsonObject) {
                     if (jsonObject == null) {
-                        Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         return;
                     }
@@ -275,7 +275,7 @@ public class ExpressagesFragment extends Fragment {
                             allTagsAdapter.notifyDataSetChanged();
                             return;
                         } else {
-                            Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                             return;
                         }
@@ -305,14 +305,14 @@ public class ExpressagesFragment extends Fragment {
             super.onPostExecute(jsonObject);
             listView.onRefreshComplete();
             if (jsonObject == null) {
-                Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                 GET_DATA_TASK_STATE = AVAILABLE;
                 return;
             }
             try {
                 int responseCode = jsonObject.getInt("code");
                 if (responseCode == HttpUtil.FAILED) {
-                    Toast.makeText(getActivity(), "参数错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                     GET_DATA_TASK_STATE = AVAILABLE;
                     return;
                 } else if (responseCode == HttpUtil.SUCCESS) {
@@ -332,18 +332,18 @@ public class ExpressagesFragment extends Fragment {
                     if (results.length() < 10) {
                         endData = true;
                         //CONVERT_CACHE == false
-                        Snackbar.make(listView, "没有更多数据", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                        Snackbar.make(listView, R.string.no_data, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     }
                     adapter.notifyDataSetChanged();
                     GET_DATA_TASK_STATE = AVAILABLE;
                     return;
                 } else if (responseCode == HttpUtil.NO_DATA) {
                     endData = true;
-                    Snackbar.make(listView, "没有更多数据", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                    Snackbar.make(listView, R.string.no_data, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     GET_DATA_TASK_STATE = AVAILABLE;
                     return;
                 } else {
-                    Toast.makeText(getActivity(), "网络出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                     GET_DATA_TASK_STATE = AVAILABLE;
                     return;
                 }

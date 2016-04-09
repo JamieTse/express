@@ -100,11 +100,11 @@ public class ToCommentsFragment extends Fragment {
                 if (listData.get(currPosition).get(UsedFields.DBApplyRecord.EX_APPLYER).toString().trim().equals(preference.getUserId())) {
                     args.putString(UsedFields.DBCreditRecord.TO_USER, listData.get(currPosition).get(UsedFields.DBApplyRecord.EX_OWNER).toString());
                     args.putString("toUserName", listData.get(currPosition).get(UsedFields.DBApplyRecord._OWNER_NAME).toString());
-                    args.putBoolean("toWhom",false);
+                    args.putBoolean("toWhom", false);
                 } else {
                     args.putString(UsedFields.DBCreditRecord.TO_USER, listData.get(currPosition).get(UsedFields.DBApplyRecord.EX_APPLYER).toString());
                     args.putString("toUserName", listData.get(currPosition).get(UsedFields.DBApplyRecord._APPLYER_NAME).toString());
-                    args.putBoolean("toWhom",true);
+                    args.putBoolean("toWhom", true);
                 }
                 intent.putExtra("credit", args);
                 getActivity().startActivity(intent);
@@ -138,14 +138,14 @@ public class ToCommentsFragment extends Fragment {
             GET_DATA_TASK_STATE = AVAILABLE;
             listView.onRefreshComplete();
             if (jsonObject == null) {
-                Toast.makeText(getActivity().getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 try {
                     int resultCode = jsonObject.getInt("code");
                     if (resultCode == HttpUtil.NO_DATA) {
                         endData = true;
-                        Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         return;
                     } else if (resultCode == HttpUtil.SUCCESS) {
                         JSONArray commentsArray = jsonObject.getJSONArray("data");
@@ -166,7 +166,7 @@ public class ToCommentsFragment extends Fragment {
                         page += 1;
                         if (commentsArray.length() < 10) {
                             endData = true;
-                            Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -198,31 +198,31 @@ public class ToCommentsFragment extends Fragment {
             if (list.get(position).get(UsedFields.DBApplyRecord.EX_APPLYER).toString().trim().equals(preference.getUserId())) {
                 view.setBackgroundResource(R.color.light_green);
                 if (disabled == 1) {
-                    tvState.setText("状态：已取消");
+                    tvState.setText(R.string.state_disabled);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 5);
                 } else if (expired == 1) {
-                    tvState.setText("状态：已过期");
+                    tvState.setText(R.string.state_expired);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 6);
                 } else if (missionDone == 1) {
-                    tvState.setText("状态：已完成");
+                    tvState.setText(R.string.state_done);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 4);
                 } else {
-                    tvState.setText("该快递状态出错");
+                    tvState.setText(R.string.state_error);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 0);
                     return view;
                 }
             } else {
                 if (disabled == 1) {
-                    tvState.setText("状态：已取消");
+                    tvState.setText(R.string.state_disabled);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 2);
                 } else if (expired == 1) {
-                    tvState.setText("状态：已过期");
+                    tvState.setText(R.string.state_expired);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 3);
                 } else if (missionDone == 1) {
-                    tvState.setText("状态：已完成");
+                    tvState.setText(R.string.state_done);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 1);
                 } else {
-                    tvState.setText("该快递状态出错");
+                    tvState.setText(R.string.state_error);
                     list.get(position).put(UsedFields.DBCreditRecord.TYPE, 0);
                     return view;
                 }

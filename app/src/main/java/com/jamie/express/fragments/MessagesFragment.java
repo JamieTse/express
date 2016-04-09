@@ -114,14 +114,14 @@ public class MessagesFragment extends Fragment {
             GET_DATA_TASK_STATE = AVAILABLE;
             listView.onRefreshComplete();
             if (jsonObject == null) {
-                Toast.makeText(getActivity().getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 try {
                     int resultCode = jsonObject.getInt("code");
                     if (resultCode == HttpUtil.NO_DATA) {
                         endData = true;
-                        Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         return;
                     } else if (resultCode == HttpUtil.SUCCESS) {
                         JSONArray messagesArray = jsonObject.getJSONArray("data");
@@ -142,7 +142,7 @@ public class MessagesFragment extends Fragment {
                         page += 1;
                         if (messagesArray.length() < 10) {
                             endData = true;
-                            Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     }

@@ -138,14 +138,14 @@ public class PostRecordFragment extends Fragment {
             GET_DATA_TASK_STATE = AVAILABLE;
             listView.onRefreshComplete();
             if (jsonObject == null) {
-                Toast.makeText(getActivity().getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 try {
                     int resultCode = jsonObject.getInt("code");
                     if (resultCode == HttpUtil.NO_DATA) {
                         endData = true;
-                        Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         return;
                     } else if (resultCode == HttpUtil.SUCCESS) {
                         JSONArray postsArray = jsonObject.getJSONArray("data");
@@ -166,7 +166,7 @@ public class PostRecordFragment extends Fragment {
                         page += 1;
                         if (postsArray.length() < 10) {
                             endData = true;
-                            Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -200,19 +200,19 @@ public class PostRecordFragment extends Fragment {
             int applyID = Integer.valueOf(list.get(position).get(UsedFields.DBExpressage.APPLY_ID).toString());
             list.get(position).put(ViewDetailActivity.IS_APPLYER, false);
             if (applyID == 0) {
-                tvApplied.setText("状态：未领取");
+                tvApplied.setText(R.string.state_not_send);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_NOT_YET);
             } else if (Integer.valueOf(list.get(position).get(UsedFields.DBExpressage._EX_MISSION_DONE).toString()) == 1) {
-                tvApplied.setText("状态：已收到");
+                tvApplied.setText(R.string.state_done);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_DONE);
             } else if (Integer.valueOf(list.get(position).get(UsedFields.DBExpressage._EX_EXPIRED).toString()) == 1) {
-                tvApplied.setText("状态：已过期");
+                tvApplied.setText(R.string.state_expired);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_EXPIRED);
             } else if (Integer.valueOf(list.get(position).get(UsedFields.DBExpressage._APPLY_DISABLED).toString()) == 1) {
-                tvApplied.setText("状态：已取消");
+                tvApplied.setText(R.string.state_disabled);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_DISABLED);
             } else {
-                tvApplied.setText("状态：待完成");
+                tvApplied.setText(R.string.state_sending);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_NOT_DONE);
             }
             return view;

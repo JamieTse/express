@@ -20,8 +20,25 @@
     <string name="all_cancel">取消</string>
     <string name="do_login">登录</string>
 
+    <string name="error_fetching_tags">加载标签失败</string>
+    <string name="no_tags">暂无标签</string>
+    <string name="success_executing">操作成功</string>
+    <string name="failed_executing">操作失败</string>
+    <string name="failed_pushing">推送通知出错</string>
+    <string name="input_empty">请完整填写必须信息</string>
+    <string name="network_busy">网络繁忙</string>
+    <string name="no_data">没有更多记录</string>
+
+    <string name="state_sending">状态：待完成</string>
+    <string name="state_not_send">状态：未领取</string>
+    <string name="state_done">状态：已收到</string>
+    <string name="state_expired">状态：已过期</string>
+    <string name="state_disabled">状态：已取消</string>
+    <string name="state_error">该快递状态出错</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_comment">CommentActivity</string>
+
 
 </resources>

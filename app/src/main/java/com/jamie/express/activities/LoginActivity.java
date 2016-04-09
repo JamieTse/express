@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject jsonObject) {
             super.onPostExecute(jsonObject);
             if (jsonObject == null) {
-                Toast.makeText(LoginActivity.this, "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, R.string.network_busy, Toast.LENGTH_SHORT).show();
                 btn_reset.setEnabled(true);
                 btn_confrim.setEnabled(true);
                 et_password.setEnabled(true);
@@ -185,7 +185,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                     LoginActivity.this.finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                     btn_reset.setEnabled(true);
                     btn_confrim.setEnabled(true);
                     et_password.setEnabled(true);

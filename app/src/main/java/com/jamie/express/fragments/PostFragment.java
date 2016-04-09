@@ -158,10 +158,10 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                         allTagsAdapter.notifyDataSetChanged();
                         return;
                     } else if (resultCode == HttpUtil.FAILED) {
-                        Snackbar.make(gvAllTags, "加载标签失败", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(gvAllTags, R.string.error_fetching_tags, Snackbar.LENGTH_SHORT).show();
                         return;
                     } else if (resultCode == HttpUtil.NO_DATA) {
-                        Snackbar.make(gvAllTags, "暂无标签可贴", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(gvAllTags, R.string.no_tags, Snackbar.LENGTH_SHORT).show();
                         return;
                     }
                 } catch (JSONException e) {
@@ -251,20 +251,20 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                         protected void onPostExecute(Integer integer) {
                             super.onPostExecute(integer);
                             if (integer == PushMessages.SUCCESS) {
-                                Toast.makeText(getActivity(), "发布成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.success_executing, Toast.LENGTH_SHORT).show();
                                 ((ExpressActivity) getActivity()).goToFragment(R.id.nav_expressages);
                             } else if (integer == PushMessages.FAILED_PUSHING) {
-                                Toast.makeText(getActivity(), "推送通知栏出错", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.failed_pushing, Toast.LENGTH_SHORT).show();
                                 enableComponents();
                             } else if (integer == PushMessages.FAILED_SAVING) {
-                                Toast.makeText(getActivity(), "发布失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.failed_executing, Toast.LENGTH_SHORT).show();
                                 enableComponents();
                             }
                         }
                     }.execute(etAddr.getText().toString().trim(), btnSetDate.getText().toString().trim() + " " + btnSetTime.getText().toString().trim(),
                             etDescr.getText().toString().trim(), etReward.getText().toString().trim(), etSubst.getText().toString().trim());
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "请完整填写以上必须信息", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.input_empty, Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:

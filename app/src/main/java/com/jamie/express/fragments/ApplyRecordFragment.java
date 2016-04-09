@@ -137,14 +137,14 @@ public class ApplyRecordFragment extends Fragment {
             GET_DATA_TASK_STATE = AVAILABLE;
             listView.onRefreshComplete();
             if (jsonObject == null) {
-                Toast.makeText(getActivity().getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 try {
                     int resultCode = jsonObject.getInt("code");
                     if (resultCode == HttpUtil.NO_DATA) {
                         endData = true;
-                        Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         return;
                     } else if (resultCode == HttpUtil.SUCCESS) {
                         JSONArray applysArray = jsonObject.getJSONArray("data");
@@ -165,7 +165,7 @@ public class ApplyRecordFragment extends Fragment {
                         page += 1;
                         if (applysArray.length() < 10) {
                             endData = true;
-                            Toast.makeText(getActivity().getApplicationContext(), "没有更多记录", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.no_data, Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -196,19 +196,19 @@ public class ApplyRecordFragment extends Fragment {
             int missionDone = Integer.valueOf(list.get(position).get(UsedFields.DBApplyRecord.MISSION_DONE).toString());
             list.get(position).put(ViewDetailActivity.IS_APPLYER, true);
             if (disabled == 0 && expired == 0 && missionDone == 0) {
-                tvState.setText("状态：待完成");
+                tvState.setText(R.string.state_sending);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_NOT_DONE);
             } else if (disabled == 1) {
-                tvState.setText("状态：已取消");
+                tvState.setText(R.string.state_disabled);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_DISABLED);
             } else if (expired == 1) {
-                tvState.setText("状态：已过期");
+                tvState.setText(R.string.state_expired);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_EXPIRED);
             } else if (missionDone == 1) {
-                tvState.setText("状态：已收到");
+                tvState.setText(R.string.state_done);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_DONE);
             } else {
-                tvState.setText("该快递状态出错");
+                tvState.setText(R.string.state_error);
                 list.get(position).put(ViewDetailActivity.STATE, ViewDetailActivity.STATE_ERROR);
                 return view;
             }

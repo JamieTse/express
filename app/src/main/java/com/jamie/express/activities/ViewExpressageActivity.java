@@ -99,17 +99,17 @@ public class ViewExpressageActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             if (integer == PushMessages.SUCCESS) {
-                Toast.makeText(getApplicationContext(), "操作成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.success_executing, Toast.LENGTH_SHORT).show();
                 ViewExpressageActivity.this.finish();
                 return;
             } else if (integer == PushMessages.FAILED_PUSHING) {
-                Toast.makeText(getApplicationContext(), "发送消息失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.failed_pushing, Toast.LENGTH_SHORT).show();
                 return;
             } else if (integer == PushMessages.FAILED_SAVING) {
-                Toast.makeText(getApplicationContext(), "操作失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.failed_executing, Toast.LENGTH_SHORT).show();
                 return;
             } else {
-                Toast.makeText(getApplicationContext(), "网络出错", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.network_busy, Toast.LENGTH_SHORT).show();
                 return;
             }
         }
