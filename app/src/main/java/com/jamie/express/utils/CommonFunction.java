@@ -35,6 +35,20 @@ public class CommonFunction {
         return result;
     }
 
+    public static String formatDateTime(int year, int month, int date, int hour, int minute) {
+        StringBuilder result = new StringBuilder(String.valueOf(year));
+        result.append("-");
+        result.append(formatNumbers(month));
+        result.append("-");
+        result.append(formatNumbers(date));
+        result.append(" ");
+        result.append(formatNumbers(hour));
+        result.append(":");
+        result.append(formatNumbers(minute));
+        result.append(":00");
+        return result.toString();
+    }
+
     public static String formatDate(int year, int month, int date) {
         StringBuilder result = new StringBuilder(String.valueOf(year));
         result.append("年");

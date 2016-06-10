@@ -114,7 +114,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         initYear = calendar.get(Calendar.YEAR);
         initMonth = calendar.get(Calendar.MONTH);
         initDay = calendar.get(Calendar.DAY_OF_MONTH);
-        btnSetDate.setText(CommonFunction.formatDate(initYear, initMonth, initDay));
+        btnSetDate.setText(CommonFunction.formatDate(initYear, initMonth + 1, initDay));
         btnSetTime.setText(CommonFunction.formatTime(initHour, initMinute));
         btnDoPost.setOnClickListener(this);
         btnSetTime.setOnClickListener(this);
@@ -261,7 +261,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
                                 enableComponents();
                             }
                         }
-                    }.execute(etAddr.getText().toString().trim(), btnSetDate.getText().toString().trim() + " " + btnSetTime.getText().toString().trim(),
+                    }.execute(etAddr.getText().toString().trim(), CommonFunction.formatDateTime(initYear, initMonth + 1, initDay, initHour, initMinute),
                             etDescr.getText().toString().trim(), etReward.getText().toString().trim(), etSubst.getText().toString().trim());
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), R.string.input_empty, Toast.LENGTH_SHORT).show();
@@ -312,7 +312,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            btnSetDate.setText(CommonFunction.formatDate(year, monthOfYear, dayOfMonth));
+            btnSetDate.setText(CommonFunction.formatDate(year, monthOfYear + 1, dayOfMonth));
             initYear = year;
             initMonth = monthOfYear;
             initDay = dayOfMonth;

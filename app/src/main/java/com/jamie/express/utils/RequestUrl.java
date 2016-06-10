@@ -8,13 +8,13 @@ public class RequestUrl {
     /**
      * 服务器地址
      */
-    //public static final String SERVER_ROOT = "http://192.168.56.1/app_express";
+    public static final String SERVER_ROOT = "http://192.168.56.1/app_express";
 
-    public static final String SERVER_ROOT = "http://jamieexpress.applinzi.com";
+    //public static final String SERVER_ROOT = "http://jamieexpress.applinzi.com";
 
-    //public static final String IMG_URL = SERVER_ROOT + "/Public/upload/";
+    public static final String IMG_URL = SERVER_ROOT + "/Public/upload/";
 
-    public static final String IMG_URL = "http://jamieexpress-public.stor.sinaapp.com/upload/";
+    //public static final String IMG_URL = "http://jamieexpress-public.stor.sinaapp.com/upload/";
 
     public static final String LOGIN_URL = SERVER_ROOT + "/index.php/Login/do_login";
 

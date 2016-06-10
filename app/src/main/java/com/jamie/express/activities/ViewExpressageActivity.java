@@ -81,9 +81,13 @@ public class ViewExpressageActivity extends AppCompatActivity {
                     return;
                 }
                 new DoHelpTask().execute(args.getString(UsedFields.DBExpressage.FROM_USER));
-                Intent intent = new Intent();
-                intent.putExtra("listID", listID);
-                ViewExpressageActivity.this.setResult(DID_HELP, intent);
+                if (listID == -1) {
+                    ViewExpressageActivity.this.finish();
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("listID", listID);
+                    ViewExpressageActivity.this.setResult(DID_HELP, intent);
+                }
             }
         });
     }

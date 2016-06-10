@@ -3,14 +3,20 @@ package com.jamie.express.receivers;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.jamie.express.activities.ExpressActivity;
+import com.jamie.express.activities.ViewExpressageActivity;
+import com.jamie.express.utils.HttpUtil;
+import com.jamie.express.utils.RequestUrl;
+import com.jamie.express.utils.UsedFields;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
@@ -26,8 +32,14 @@ public class PushReceiver extends BroadcastReceiver {
     }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         Bundle bundle = intent.getExtras();
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
@@ -46,21 +58,68 @@ public class PushReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
+            try {
+                if (jsonObject.getInt("type") == 0) {
+                    final int ex_id = jsonObject.getInt(UsedFields.DBExpressage.EXPRESSAGE_ID);
+                    new AsyncTask<Void, Void, JSONObject>() {
 
-            //打开自定义的Activity
-            Intent i = new Intent(context, ExpressActivity.class);
-            i.putExtras(bundle);
-            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            context.startActivity(i);
+                        @Override
+                        protected JSONObject doInBackground(Void... params) {
+                            HashMap<String, Object> paramList = new HashMap<String, Object>();
+                            paramList.put(UsedFields.DBExpressage.EXPRESSAGE_ID, ex_id);
+                            return HttpUtil.getData(RequestUrl.GET_SINGLE_EXPRESSAGE_URL, paramList);
+                        }
+
+                        @Override
+                        protected void onPostExecute(JSONObject result) {
+                            super.onPostExecute(result);
+                            try {
+                                int responseCode = result.getInt("code");
+                                if (responseCode == HttpUtil.FAILED) {
+                                    return;
+                                } else if (responseCode == HttpUtil.SUCCESS) {
+                                    Bundle args = new Bundle();
+                                    JSONObject resultData = result.getJSONObject("data");
+                                    //Map<String, Object> map = new HashMap<String, Object>();
+                                    Iterator<String> iterator = resultData.keys();
+                                    while (iterator.hasNext()) {
+                                        String key = iterator.next();
+                                        if (key.equals(UsedFields.ID)) {
+                                            args.putInt(key, resultData.getInt(key));
+                                        } else {
+                                            args.putString(key, resultData.getString(key));
+                                        }
+                                    }
+                                    Intent exIntent = new Intent(context, ViewExpressageActivity.class);
+                                    exIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    exIntent.putExtra("expressage", args);
+                                    exIntent.putExtra("listID", -1);
+                                    context.startActivity(exIntent);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.execute();
+                } else {
+                    //打开自定义的Activity
+                    Intent i = new Intent(context, ExpressActivity.class);
+                    i.putExtras(bundle);
+                    //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(i);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
 
-        } else if(JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
+        } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
             boolean connected = intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false);
-            Log.w(TAG, "[MyReceiver]" + intent.getAction() +" connected state change to "+connected);
+            Log.w(TAG, "[MyReceiver]" + intent.getAction() + " connected state change to " + connected);
         } else {
             Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
         }
@@ -72,7 +131,7 @@ public class PushReceiver extends BroadcastReceiver {
         for (String key : bundle.keySet()) {
             if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
                 sb.append("\nkey:" + key + ", value:" + bundle.getInt(key));
-            }else if(key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)){
+            } else if (key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)) {
                 sb.append("\nkey:" + key + ", value:" + bundle.getBoolean(key));
             } else if (key.equals(JPushInterface.EXTRA_EXTRA)) {
                 if (bundle.getString(JPushInterface.EXTRA_EXTRA).isEmpty()) {
@@ -82,12 +141,12 @@ public class PushReceiver extends BroadcastReceiver {
 
                 try {
                     JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
-                    Iterator<String> it =  json.keys();
+                    Iterator<String> it = json.keys();
 
                     while (it.hasNext()) {
                         String myKey = it.next().toString();
                         sb.append("\nkey:" + key + ", value: [" +
-                                myKey + " - " +json.optString(myKey) + "]");
+                                myKey + " - " + json.optString(myKey) + "]");
                     }
                 } catch (JSONException e) {
                     Log.e(TAG, "Get message extra JSON error!");
@@ -100,7 +159,7 @@ public class PushReceiver extends BroadcastReceiver {
         return sb.toString();
     }
 
-    private void processCustomMessage(Context context, Bundle bundle){
+    private void processCustomMessage(Context context, Bundle bundle) {
 
     }
 

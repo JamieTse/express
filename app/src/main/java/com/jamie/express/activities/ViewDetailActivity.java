@@ -91,7 +91,7 @@ public class ViewDetailActivity extends AppCompatActivity {
     }
 
     private void ownerInit() {
-        tvIsApplyer.setText("领取人：");
+        tvIsApplyer.setText("领取用户");
         btnLeft.setText("确认收到");
         btnRight.setText("过期未送");
         exID = args.getInt(UsedFields.ID);
@@ -127,7 +127,7 @@ public class ViewDetailActivity extends AppCompatActivity {
     }
 
     private void applyerInit() {
-        tvIsApplyer.setText("发布人：");
+        tvIsApplyer.setText("发布用户");
         showPersonBlock();
         btnLeft.setText("提醒确认");
         btnRight.setText("取消代领");
@@ -157,8 +157,8 @@ public class ViewDetailActivity extends AppCompatActivity {
         tvReward.setText(args.getString(UsedFields.DBApplyRecord._EX_REWARD));
         tvSubs.setText(args.getString(UsedFields.DBApplyRecord._EX_SUBSTANCE));
         tvApplyTime.setText(CommonFunction.formatDateTime(args.getString(UsedFields.DBApplyRecord.CREATE_TIME)));
-        tvName.setText(args.getString(UsedFields.DBApplyRecord._APPLYER_NAME));
-        ImageLoader.loadBitmap(RequestUrl.IMG_URL + args.getString(UsedFields.DBApplyRecord._APPLYER_ICON), new ImageLoader.BitmapCallback() {
+        tvName.setText(args.getString(UsedFields.DBApplyRecord._OWNER_NAME));
+        ImageLoader.loadBitmap(RequestUrl.IMG_URL + args.getString(UsedFields.DBApplyRecord._OWNER_ICON), new ImageLoader.BitmapCallback() {
             @Override
             public void onGotBitmap(Bitmap bitmap) {
                 ivHead.setImageBitmap(bitmap);
